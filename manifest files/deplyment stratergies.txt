@@ -1,0 +1,18 @@
+deployment stratergies type 
+1.rolling update- in rolling update new instance are created while old 
+  		  instance terminated simunteniously.without any downtime 
+		 
+2.blue green- having two identical application with only one active at time
+        	the inactive envirement updated without affecting user.
+		zero downtime and easy to roll backe privious version         
+	  	
+3.canary- it involves rolling out update small subset of user before rolling 
+	  it on larger group.
+          ouick detection of issue before affecting all user 
+4.a/b testing- A/B involves deploying multipal version of an application
+		and directing different user on each version to compare 
+		performence. 
+5.recreate- it will be delete the privious version of application create 
+    	    new version
+	  - all instance are running in the same version 
+	  - it face downtime issue
