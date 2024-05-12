@@ -1,0 +1,29 @@
+provider "aws" {
+    region = "us-west-2"
+  profile = "default"
+}
+
+resource "aws_iam_user" "name" {
+  name = "dalton" 
+
+  
+  }
+
+ # Group-add
+resource "aws_iam_group" "group" {
+  name = "cbz"
+}
+
+resource "aws_iam_user" "name" {
+  name = "dalton"
+}
+
+resource "aws_iam_group_membership" "team" {
+  name = "cbz"
+
+  users = [
+    aws_iam_user.name.name
+  ]
+
+  group = aws_iam_group.group.name
+}
