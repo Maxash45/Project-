@@ -1,0 +1,50 @@
+provider "aws" {
+  region = "us-west-2"
+  profile = "default"
+}
+
+variable "region" {
+  description = "AWS region"
+  default     = "us-west-2"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  default     = "t2.micro"
+}
+resource "aws_security_group" "main-sg" {
+  name = "my-tsg"
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "aws_instance" {
+  ami           = "ami-01cd4de4363ab6ee8" 
+  instance_type = var.instance_type
+
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y docker
+              service docker start
+              usermod -a -G docker ec2-user
+
+              # Optional: Install Docker Compose
+              curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              chmod +x /usr/local/bin/docker-compose
+              EOF
+
+  tags = {
+    Name = "docker-instance"
+  }
+}
