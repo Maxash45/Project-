@@ -1,0 +1,11 @@
+       ______install______
+
+- yum install java-11 
+- yum install maven-3.9.6 
+- env path set in bashrc
+  -export
+  -source 
+- mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+- mvn package
+       _____tomcat-install____
+ 
