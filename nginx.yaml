@@ -1,0 +1,34 @@
+apiversion: apps/v1
+kind: deployment
+metadeta: 
+  name: nginx
+  namespace: nginx
+spac:
+  replicas: 1
+  selectors:
+    matchlabels: 
+       app: nginx
+  template :
+    metadata:
+      labels:
+        app: nginx    
+    spac:
+      container:
+        - name: nginx
+          image: nginx:latest
+          port:
+            - containerport: 80
+
+---
+apiversion: vi 
+kind: Service
+metadata:
+  name: nginx
+  namespace: nginx
+spac:
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+  type: NodePort
